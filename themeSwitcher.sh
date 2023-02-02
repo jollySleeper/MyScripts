@@ -15,7 +15,10 @@ else
     OPST_COLOR="light"
 fi
 
+# Alacritty
 cd "$ALACRITTY_PATH"
 rm colors.yml
 ln -s "$COLOR.yml" colors.yml
+
+# Nvim
 sed -i "21s/$OPST_COLOR/$COLOR/g" $NVIM_THEME_PATH
