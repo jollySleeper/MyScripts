@@ -7,6 +7,7 @@ USER=jollySleeper
 EMAIL=git@pm21.anonaddy.com
 GITHUB_SSH_ALIAS=github.com
 GITLAB_SSH_ALIAS=gitlab.com
+CODEBERG_SSH_ALIAS=codeberg.org
 
 # Creating Directory
 mkdir $*
@@ -30,6 +31,7 @@ git remote add origin git@$GITHUB_SSH_ALIAS:$USER/$*.git
 # Setting Origin Push Urls
 git remote set-url --add --push origin git@$GITHUB_SSH_ALIAS:$USER/$*.git 
 git remote set-url --add --push origin git@$GITLAB_SSH_ALIAS:$USER/$*.git 
+git remote set-url --add --push origin git@$CODEBERG_SSH_ALIAS:$USER/$*.git 
 
 # Pushing
 echo -e "\n--- \t Pushing \t ---\n"
