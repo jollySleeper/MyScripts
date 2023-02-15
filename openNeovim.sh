@@ -13,8 +13,8 @@ else
     ARGS+=$*
 fi
 
-# cd $BUILD_LOCATION
-# VIMRUNTIME=runtime ./build/bin/nvim "$ARGS"
-#
-# #Go Back to Directory
-# cd $DIR
+cd $BUILD_LOCATION
+VIMRUNTIME=runtime ./build/bin/nvim "$ARGS"
+
+#Go Back to Directory
+cd $DIR
