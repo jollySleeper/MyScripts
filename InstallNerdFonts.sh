@@ -2,11 +2,11 @@
 
 echo "Installing DejaVuSansMono & Hack Nerd Fonts & NotoColor Emoji Font"
 
-if [[ ! -d "$HOME/.local/share/fonts/test" ]]; then
-    echo "Making Directory '$HOME/.local/share/fonts/test'"
-    mkdir -p "$HOME/.local/share/fonts/test" 
+if [[ ! -d "$HOME/.local/share/fonts" ]]; then
+    echo "Making Directory '$HOME/.local/share/fonts'"
+    mkdir -p "$HOME/.local/share/fonts" 
 fi
-cd "$HOME/.local/share/fonts/test" 
+cd "$HOME/.local/share/fonts" 
 
 # NerFonts 
 NERFONTS=("DejaVuSansMono" "Hack")
