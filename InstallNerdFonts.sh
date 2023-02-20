@@ -43,4 +43,5 @@ if [[ -f "NotoColorEmoji.zip" ]]; then
 fi
 cd ..
 
+fc-cache -f
 echo "Done :P"
