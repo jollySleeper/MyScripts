@@ -44,20 +44,22 @@ if [[ $(check_url $URL) -eq "NULL" ]]; then
     exit
 fi
 
+# Generating Folder Name from URL
+REPO=$(echo -n $URL | choose -f "/" -1)
+
 if [[ -z $2 ]]; then
     echo "Custom Folder Name Not Provided, Using Default"
-    # Generating Folder Name from URL
-    REPO=$(echo -n $URL | choose -f "/" -1)
+    FOLDER_TO_CLONE_IN=$REPO
 else
-    REPO=$2
+    FOLDER_TO_CLONE_IN=$2
 fi
 
 # Clone Repo
 # In Case SSH URL Provided
-git clone $1 $REPO
+git clone $1 $FOLDER_TO_CLONE_IN
 
 # Creating Directory
-cd $REPO
+cd $FOLDER_TO_CLONE_IN
 
 # Git
 git config --local user.name $USER
@@ -65,9 +67,12 @@ git config --local user.email $EMAIL
 
 # Adding Origin
 # Make sure repo is created with same name on Github
+git remote remove origin
 git remote add origin "git@${GITHUB_SSH_ALIAS}:${USER}/${REPO}.git"
 
 # Setting Origin Push Urls
 git remote set-url --add --push origin "git@${GITHUB_SSH_ALIAS}:${USER}/${REPO}.git"
 git remote set-url --add --push origin "git@${GITLAB_SSH_ALIAS}:${USER}/${REPO}.git"
 git remote set-url --add --push origin "git@${CODEBERG_SSH_ALIAS}:${USER}/${REPO}.git"
+
+echo "Done! Thank You <3"
