@@ -15,8 +15,10 @@ if [[ -z $* ]]; then
 fi
 
 REPO=$*
-# Creating Directory
-mkdir -p $REPO
+if [[ ! -d "$REPO" ]]; then
+    # Creating Directory
+    mkdir -p $REPO
+fi
 cd $REPO
 
 # Git
