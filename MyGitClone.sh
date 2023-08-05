@@ -30,9 +30,13 @@ if [[ -z $1 ]]; then
     exit
 fi
 
+# Creating URL
+if [[ $1 == *".git" ]]; then
+    URL="$(echo -n "$1" | choose -f ".git$" 0)"
+fi
+
 # Check if Using SSH for Cloning
 if [[ $1 == *"@"* ]]; then
-    # Creating URL
     URL="${GITHUB_URL}/$(echo -n "$1" | choose -f ":" 1)"
 else
     URL=$1
