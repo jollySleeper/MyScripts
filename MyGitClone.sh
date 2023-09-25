@@ -31,20 +31,19 @@ if [[ -z $1 ]]; then
 fi
 
 # Creating URL
+URL=$1
 if [[ $1 == *".git" ]]; then
     URL="$(echo -n "$1" | choose -f ".git$" 0)"
 fi
 
 # Check if Using SSH for Cloning
-if [[ $1 == *"@"* ]]; then
-    URL="${GITHUB_URL}/$(echo -n "$1" | choose -f ":" 1)"
-else
-    URL=$1
+if [[ $URL == *"@"* ]]; then
+    URL="${GITHUB_URL}/$(echo -n "$URL" | choose -f ":" 1)"
 fi
 
 # Check if URL Provided is Valid
 if [[ $(check_url $URL) -eq "NULL" ]]; then
-    echo "URL Provided isn't Valid"
+    echo "URL Provided '$URL' isn't Valid"
     exit
 fi
 
