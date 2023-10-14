@@ -82,6 +82,7 @@ install_or_update_appimage () {
         if [[ -f $APP_NAME ]]; then
             if [[ $(readlink -f $APP_NAME) == $FILE_PATH ]]; then
                 echo "File \"$APP_NAME\" Already Installed"
+                return
             else
                 echo "SymLink \"$APP_NAME\" Already Exists, Making it Old"
                 if [[ -f "${APP_NAME}.old" ]]; then
@@ -93,6 +94,7 @@ install_or_update_appimage () {
                 mv $APP_NAME "${APP_NAME}.old"
             fi
         fi
+
         echo "Creating SymLink as \"$APP_NAME\""
         ln -s "$HOME/Apps/AppImage/$*" $APP_NAME
         echo "Done, Thank You"
