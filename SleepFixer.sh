@@ -21,6 +21,6 @@ if [[ $TIME > 22 ]] && [[ $TIME < 5 ]]; then
 else
     # Just for Backup, This works by SystemD Timer Now
     send_notification "Scheduled Shut Down at 23:00";
-    shutdown -P 23:05
+    shutdown -P 23:05 --no-wall
 fi 
 
