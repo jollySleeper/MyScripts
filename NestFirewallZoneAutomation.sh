@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# cat NestFireWallZoneAutomation.sh | ssh root@router.lan sh 
+# cat NestFirewallZoneAutomation.sh | ssh root@router.lan|router sh 
 
 # Having Firewall Zone as "Nest"
 FirewallZoneRuleNumber=$(uci show firewall | grep "Nest" | cut -d "[" -f 2 | cut -d "]" -f 1);
