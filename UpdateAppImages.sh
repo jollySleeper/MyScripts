@@ -86,10 +86,10 @@ install_or_update_appimage () {
             else
                 echo "SymLink \"$APP_NAME\" Already Exists, Making it Old"
                 if [[ -f "${APP_NAME}.old" ]]; then
+                    echo "Deleting Previous File \"$(readlink -f $APP_NAME.old)\""
+                    rm "$(readlink -f $APP_NAME.old)" 
                     echo "Deleting Previous Old SymLink \"${APP_NAME}.old\""
                     rm "${APP_NAME}.old" 
-                    echo "Deleting Previous File \"$(readlink -f $APP_NAME)\""
-                    rm "$(readlink -f $APP_NAME)" 
                 fi
                 mv $APP_NAME "${APP_NAME}.old"
             fi
