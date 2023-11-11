@@ -171,7 +171,7 @@ install_or_update_logseq () {
 
 install_or_update_ungoogled_chromium () {
     echo "Installing/Updating Ungoogled Chromium"
-    install_or_update_app "https://github.com/clickot/ungoogled-chromium-binaries"
+    install_or_update_app "https://github.com/ungoogled-software/ungoogled-chromium-portablelinux"
 }
 
 # All Apps Function
