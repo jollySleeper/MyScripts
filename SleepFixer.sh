@@ -12,15 +12,15 @@ send_notification () {
 }
 
 TIME=$(date "+%H")
-if [[ $TIME > 22 ]] && [[ $TIME < 5 ]]; then
-    send_notification "Shutting Down in 15s";
-    sleep 10;
-    send_notification "Shutting Down in 5s";
-    sleep 5;
-    shutdown now;
+if [[ "$TIME" -lt 5 ]] || [[ "$TIME" -gt 22 ]]; then
+    send_notification "Shutting Down in 15s"
+    sleep 10
+    send_notification "Shutting Down in 5s"
+    sleep 5
+    shutdown now
 else
     # Just for Backup, This works by SystemD Timer Now
-    send_notification "Scheduled Shut Down at 23:00";
+    send_notification "Scheduled Shut Down at 23:00"
     shutdown -P 23:05 --no-wall
 fi 
 
