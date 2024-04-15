@@ -132,7 +132,7 @@ get_latest_github_tag () {
 
 get_appimage_file_url () {
     local APPIMAGE_FILE_URL_PATH;
-    APPIMAGE_FILE_URL_PATH=$(curl -s $* | rg '(.*href.*.AppImage.*)' | choose -f "\"" 1 | rg '.*AppImage.$')
+    APPIMAGE_FILE_URL_PATH=$(curl -s $* | rg '(.*href.*.AppImage.*)' | choose -f "\"" 1 | rg '.*AppImage$')
     
     echo "${GITHUB_URL}${APPIMAGE_FILE_URL_PATH}"
 }
