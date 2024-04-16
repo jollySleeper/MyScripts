@@ -17,8 +17,8 @@ fi
 
 # Alacritty
 cd "$ALACRITTY_PATH"
-rm colors.yml
-ln -s "$COLOR.yml" colors.yml
+rm colors.toml
+ln -s "$COLOR.toml" colors.toml
 
 # Nvim
 sed -i "21s/$OPST_COLOR/$COLOR/g" $NVIM_THEME_PATH
