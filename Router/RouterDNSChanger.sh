@@ -9,11 +9,23 @@ MYDNS_DASHBOARD="http://$MYDNS:8080"
 
 change_dns() {
     if [[ $DNS != $* ]]; then
+        # Setting WAN DNS
         uci set network.wan.peerdns='0'
         uci set network.wan6.peerdns='0'
         uci del network.wan.dns
         uci add_list network.wan.dns=$*
         uci commit
+
+        # Advertising DNS for LAN Clients
+        if [[ $* == "$MYDNS" ]]; then
+            uci add_list dhcp.lan.dhcp_option="6,$MYDNS"
+        else
+            uci del dhcp.lan.dhcp_option
+        fi
+        uci commit dhcp
+        # No Need To Restart DNSMASQ since Restarting whole Network
+        #service dnsmasq restart
+
         echo "Restarting Network";
         /etc/init.d/network restart
         DNS=$*
