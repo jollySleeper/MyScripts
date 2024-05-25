@@ -44,7 +44,7 @@ if [[ ! -z $1 ]]; then
     git status --porcelain
     git add ./
     git status --porcelain
-    git commit -m "Started: $1: Template Added"
+    git commit -m "Started: $(echo $1 | sed 's/[^-]*/\u&/g): Template Added"
     git push
 else
     echo "Please Enter Folder Name"
