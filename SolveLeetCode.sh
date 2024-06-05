@@ -39,12 +39,13 @@ if [[ ! -z $1 ]]; then
     node js/main.js
 
     echo "# $1" >> README.md
+    # TODO: Add Source & Other Meta Data
     
     echo "Commiting"
     git status --porcelain
     git add ./
     git status --porcelain
-    git commit -m "Started: $(echo $1 | sed 's/[^-]*/\u&/g): Template Added"
+    git commit -m "Started: $(echo $1 | sed 's/[^-]*/\u&/g'): Template Added"
     git push
 else
     echo "Please Enter Folder Name"
