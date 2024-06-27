@@ -15,7 +15,6 @@ if [[ ! -z $1 ]]; then
         cd $1
     fi
     mkdir -p cpp/target
-    # echo -e '#include "iostream"\nusing namespace std;\n\nint main() {\n\tcout<<"\tSolve It With C++"<<endl;\n\n\treturn 0;\n}\n' >> main.cpp
     echo -e '#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main(){cout<<"Hello, world! ~ C++"<<endl;return 0;}' >> cpp/main.cpp
     clang-format -i cpp/main.cpp -style=file:../.clang-format
     g++ cpp/main.cpp -o cpp/target/main && ./cpp/target/main
@@ -27,7 +26,6 @@ if [[ ! -z $1 ]]; then
     mkdir go
     cd go
     go mod init "go-$1"
-    # echo -e 'package main\n\nimport "fmt"\n\nfunc main () {\n\tfmt.Println("Hello")\n}' >> src/main.go
     echo -e 'package main\n\nimport "fmt"\n\nfunc main () {\nfmt.Println("Hello, world! ~ GO")\n}' >> main.go
     go fmt main.go
     go run .
