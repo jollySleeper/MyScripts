@@ -1,10 +1,6 @@
 #!/bin/bash
 
-if [[ ! -z $1 ]]; then
-    echo "Making Directory: $1"
-    mkdir $1
-    cd $1
-
+create_cpp_files () {
     echo "Creating C++ Repo"
     # Special Case for This Repo otherwise Create .clang-format in 'cpp' Foler
     if [[ ! -f ../.clang-format ]]; then
@@ -15,29 +11,81 @@ if [[ ! -z $1 ]]; then
         cd $1
     fi
     mkdir -p cpp/target
-    echo -e '#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main(){cout<<"Hello, world! ~ C++"<<endl;return 0;}' >> cpp/main.cpp
+    cat > cpp/main.cpp << EOF
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+cout<<"Hello, world! ~ C++"<<endl;
+// Solution solutionObject;
+
+return 0;
+}
+EOF
     clang-format -i cpp/main.cpp -style=file:../.clang-format
     g++ cpp/main.cpp -o cpp/target/main && ./cpp/target/main
+}
 
+create_rust_files () {
     echo "Creating Rust Repo"
-    cargo new rust
+    cargo new 'rust' && cd rust
+    cat > src/main.rs << EOF
+pub struct Solution;
 
+fn main() {
+    println!("Hello, world! ~ Rust");
+}
+EOF
+    rustfmt --force src/main.rs
+    cargo run
+    cd ..
+}
+
+create_go_files () {
     echo "Creating Go Repo"
-    mkdir go
-    cd go
+    mkdir go && cd go
     go mod init "go-$1"
-    echo -e 'package main\n\nimport "fmt"\n\nfunc main () {\nfmt.Println("Hello, world! ~ GO")\n}' >> main.go
+    cat > main.go << EOF
+package main
+
+import "fmt"
+
+func main () {
+    fmt.Println("Hello, world! ~ GO")
+}
+EOF
     go fmt main.go
     go run .
     cd ..
+}
 
+create_js_files () {
     echo "Creation JS Repo"
     mkdir js
     echo "console.log('Hello, world! ~ JS')" >> js/main.js
     node js/main.js
+}
 
-    echo "# $1" >> README.md
+generate_readme () {
     # TODO: Add Source & Other Meta Data
+    echo "# $1" >> README.md
+}
+
+if [[ ! -z $1 ]]; then
+    echo "Making Directory: $1"
+    mkdir $1
+    cd $1
+
+    create_cpp_files $1
+
+    create_rust_files
+
+    create_go_files $1
+
+    create_js_files
+
+    generate_readme $1
     
     echo "Commiting"
     git status --porcelain
