@@ -5,7 +5,7 @@ QUAD9="9.9.9.9"         # Remote Hosted 1
 AGDNS="94.140.14.15"    # Remote Hosted 2
 MYDNS="192.168.1.105"   # Local Hosted
 
-MYDNS_DASHBOARD="http://$MYDNS:8080"
+MYDNS_DASHBOARD="http://my-dns-server.lan"
 
 change_dns() {
     if [[ $DNS != $* ]]; then
@@ -48,6 +48,7 @@ if [[ $DNS != $MYDNS ]]; then
     #res=$(nc "$MYDNS" 53)
     # 'nslookup' won't work as DNS is cached for some time
     #res=$(nslookup dns-server.lan | grep "Address 1")
+    #wget -t 3 --retry-connrefused --retry-on-host-error "$MYDNS_DASHBOARD" -O /tmp/status-check.html
     wget "$MYDNS_DASHBOARD" -O /tmp/status-check.html
     wgetCommandExitCode=$?
 
@@ -67,6 +68,7 @@ elif [[ $DNS == $MYDNS ]]; then
     #res=$(nc 192.168.1.105 53)
     # 'nslookup' won't work as DNS is cached for some time
     #res=$(nslookup dns-server.lan | grep "Address 1")
+    #wget -t 3 --retry-connrefused --retry-on-host-error "$MYDNS_DASHBOARD" -O /tmp/status-check.html
     wget "$MYDNS_DASHBOARD" -O /tmp/status-check.html
     wgetCommandExitCode=$?
 
