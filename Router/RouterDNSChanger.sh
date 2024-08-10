@@ -39,7 +39,7 @@ reloadAndCommit() {
     uci commit;
 }
 
-# Checking And Changing DNS of Router
+echo "Checking And Changing DNS of Router"
 if [[ $DNS != $MYDNS ]]; then
     ping -c 1 $MYDNS &> /dev/null
     pingCommandExitCode=$?
@@ -82,7 +82,7 @@ elif [[ $DNS == $MYDNS ]]; then
     fi
 fi
 
-# Allowing Devices To Only Work With AdGuardHome
+echo "Allowing Devices To Only Work With AdGuardHome"
 FirewallZoneRuleNumber=$(uci show firewall | grep "CutAcessWithoutAGH" | cut -d "[" -f 2 | cut -d "]" -f 1);
 if [[ -z "$FirewallZoneRuleNumber" ]]; then
     echo "No Firewall Zone Rule named 'CutAcessWithoutAGH' Found. Exiting";
