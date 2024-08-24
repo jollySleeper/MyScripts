@@ -60,6 +60,20 @@ EOF
     cd ..
 }
 
+create_java_files () {
+    echo "Creating Java Repo"
+    mkdir -p java/target
+    cat > java/main.java << EOF
+class Solution {
+    public static void main(String[] args) {
+        System.out.println("Hello, world! ~ Java");       
+        // Solution solutionObject = new Solution();
+    }
+}
+EOF
+    javac -d java/target java/main.java && java -cp java/target Solution
+}
+
 create_js_files () {
     echo "Creation JS Repo"
     mkdir js
@@ -68,8 +82,23 @@ create_js_files () {
 }
 
 generate_readme () {
-    # TODO: Add Source & Other Meta Data
-    echo "# $1" >> README.md
+    cat > README.md << EOF
+# $1
+
+## Solutions
+
+### C++
+
+### Go
+
+### Java
+
+### JavaScript
+
+### Rust
+ 
+## Notes
+EOF
 }
 
 if [[ ! -z $1 ]]; then
@@ -79,11 +108,13 @@ if [[ ! -z $1 ]]; then
 
     create_cpp_files $1
 
-    create_rust_files
-
     create_go_files $1
 
+    create_java_files
+
     create_js_files
+
+    create_rust_files
 
     generate_readme $1
     
