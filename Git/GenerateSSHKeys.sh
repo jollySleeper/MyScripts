@@ -8,4 +8,6 @@ do
     echo "Public Key for => $source"
     bat "id_$source.pub"
     cd -
+    echo "Testing Keys"
+    ssh -T git@${source}.com
 done
